@@ -1,0 +1,7 @@
+.idea/
+*.log
+*.iml
+node_modules/
+.deploy_git/
+db.json
+public/

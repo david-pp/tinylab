@@ -40,3 +40,10 @@ hexo deploy
 ```
 hexo new post-title
 ```
+
+### 支持
+
+- 多说评论系统
+- 多说分享系统
+- 百度统计
+- RSS订阅
