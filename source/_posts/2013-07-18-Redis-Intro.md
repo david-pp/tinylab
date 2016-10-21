@@ -4,7 +4,7 @@ title: Redis：简介
 category : 架构
 tags : [redis, 开源架构]
 date: 2013/07/18  21:13  +0800
---- 
+---
 
 Redis是一个开源的，先进的key-value持久化产品。它通常被称为数据结构服务器，它的值可以是字符串（String）、哈希（Map）、列表（List）、集合（Sets）和有序集合（Sorted sets）等类型。
 

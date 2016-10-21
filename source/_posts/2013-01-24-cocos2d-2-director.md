@@ -4,7 +4,7 @@ title: cocos2d-iphone源码分析(2)：Director
 category : 游戏开发
 tags : [iOS, cocos2d]
 date: 2013/01/24  14:44  +0800
---- 
+---
 
 ### 简介
 
