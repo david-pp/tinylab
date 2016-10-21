@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 我思故我在
+title: TinyLab
 subtitle: Keep eyes on the star and feet on the ground.
 description:
 author: David++
@@ -67,5 +67,13 @@ theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type:
+deploy: 
+- type: git
+  #repo: https://github.com/david-pp/david-pp.github.io.git
+  repo: git@github.com:david-pp/david-pp.github.io.git
+  branch: master
+
+
+
+# 头像
+avatar: /images/avatar.png

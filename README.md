@@ -15,6 +15,7 @@
 
 ```
 npm install
+npm install hexo-deployer-git --save
 ```
 
 运行：
@@ -22,3 +23,15 @@ npm install
 ```
 hexo server
 ``` 
+
+部署：
+
+```
+hexo deploy
+```
+
+添加一篇文章：
+
+```
+hexo new post-title
+```

@@ -32,8 +32,9 @@ menu:
   #categories: /categories
   #about: /about
   archives: /archives
+  categories: /categories
   tags: /tags
-  schedule: /schedule
+  #schedule: /schedule
   #commonweal: /404.html
 
 
@@ -43,7 +44,7 @@ menu:
 #   Key is the name of menu item and value is the name of FontAwsome icon. Key is case-senstive.
 #   When an question mask icon presenting up means that the item has no mapping icon.
 menu_icons:
-  enable: false
+  enable: true
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
   about: user
@@ -61,9 +62,9 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
+#scheme: Muse
 #scheme: Mist
-#scheme: Pisces
+scheme: Pisces
 
 
 # ---------------------------------------------------------------
