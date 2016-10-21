@@ -16,6 +16,11 @@
 ```
 npm install
 npm install hexo-deployer-git --save
+npm install hexo-generator-feed --save
+npm install --save hexo-algolia
+npm install --save hexo-generator-index
+npm install --save hexo-generator-archive
+npm install --save hexo-generator-tag
 ```
 
 运行：

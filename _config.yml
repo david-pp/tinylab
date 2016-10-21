@@ -73,7 +73,30 @@ deploy:
   repo: git@github.com:david-pp/david-pp.github.io.git
   branch: master
 
-
+# 订阅
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
 
 # 头像
 avatar: /images/avatar.png
+
+# 多说评论系统
+duoshuo_share: true
+# 多说分享系统
+duoshuo_shortname: tiny-lab
+# 多说热评文章 true 或者 false
+duoshuo_hotartical: true
+
+# 百度统计
+baidu_analytics: 32177a2b43f11f13565131b8c1239878
+
+# 站内搜索
+# algolia:
+#   applicationID: 'N6XP43HD03'
+#   apiKey: 'ba8a92083d56c10ea981f679ece95a80'
+#   adminApiKey: '6da4d0b8f8e05c9d10172285ba9348fa'
+#   indexName: 'tinylab'
+#   chunkSize: 5000
