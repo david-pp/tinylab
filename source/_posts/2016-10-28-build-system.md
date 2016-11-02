@@ -6,7 +6,7 @@ tags : [C++, make, cmake]
 date: 2016-10-28
 ---
 
-C++少说也用了十年了，从简单的Hello World到200百万行的游戏项目，编译和构建的工具也经历了各种升级。最终的开发环境，选择了Clang+GDB+CMake。当然不断改进和升级开发工具的脚步尚未停止，只要能提高开发效率，怎样折腾都是值得的。
+C++少说也用了十年了，从简单的Hello World到200万行的游戏项目，编译和构建的工具也经历了各种升级。最终的开发环境，选择了Clang+GDB+CMake。当然不断改进和升级开发工具的脚步尚未停止，只要能提高开发效率，怎样折腾都是值得的。
 
 期间经历了：
 1. 直接调用编译和链接命令
@@ -221,7 +221,7 @@ add_executable(Tutorial tutorial.cxx)
 
 ```bash
 mkdir path-to-build
-cd path-tob-build
+cd path-to-build
 cmake path-to-source
 ```
 
