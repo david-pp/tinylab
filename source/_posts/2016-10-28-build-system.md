@@ -277,7 +277,81 @@ $ scons -Q
 
 #### WAF
 
-#### b2
+SCons项目小的话还好，规模一大，依赖分析速度急速下降，而且自动配置功能很弱 （跨平台构建能力不足），Waf尝试去解决SCons所暴露的问题。Waf也是基于Python的配置、编译、安装程序。主要特性：
+
+- 构建顺序自动化：输入输出文件的构建顺序自动化识别。
+- 依赖自动分析：根据文件或命令自动进行依赖分析。
+- 性能：任务都是并发执行的。
+- 灵活性：可以方便地通过添加新的子类创建新的命令或任务，特定构建过程中的瓶颈可以动过方法的动态重载来消除。
+- 可扩展性：默认支持多种编程语言和编译器，有需求新加的也可以通过插件进行支持。
+- IDE支持：Eclipse, Visual Studio and Xcode project generators (waflib/extras/)
+- 文档详细：入门到深入可以阅读：《Waf Book》
+- Python兼容：cPython 2.5 to 3.4, Jython 2.5, IronPython, and Pypy
+
+一个简单的C++构建脚本wscript，先睹为快：
+
+``` python
+#! /usr/bin/env python
+# encoding: utf-8
+# Thomas Nagy, 2006-2010 (ita)
+
+# the following two variables are used by the target "waf dist"
+VERSION='0.0.1'
+APPNAME='cxx_test'
+
+# these variables are mandatory ('/' are converted automatically)
+top = '.'
+out = 'build'
+
+def options(opt):
+    opt.load('compiler_cxx')
+
+def configure(conf):
+    conf.load('compiler_cxx')
+    conf.check(header_name='stdio.h', features='cxx cxxprogram', mandatory=False)
+
+def build(bld):
+    bld.shlib(source='a.cpp', target='mylib', vnum='9.8.7')
+    bld.shlib(source='a.cpp', target='mylib2', vnum='9.8.7', cnum='9.8')
+    bld.shlib(source='a.cpp', target='mylib3')
+    bld.program(source='main.cpp', target='app', use='mylib')
+    bld.stlib(target='foo', source='b.cpp')
+
+    # just a test to check if the .c is compiled as c++ when no c compiler is found
+    bld.program(features='cxx cxxprogram', source='main.c', target='app2')
+
+    if bld.cmd != 'clean':
+        from waflib import Logs
+        bld.logger = Logs.make_logger('test.log', 'build') # just to get a clean output
+        bld.check(header_name='sadlib.h', features='cxx cxxprogram', mandatory=False)
+        bld.logger = None
+```
+
+#### Boost.Build(b2)
+
+在编译Boost库的时候，会用到b2命令，其实就是Boost.Build的缩写。编译C++/C代码时，只需要指定要编译那些可执行文件或库，然后列出相关的源码，Boost.Build帮你搞定其他事情，支持Windows、OSX、Linux和商业的Unix系统。
+
+HelloWorld项目的jamroot.jam脚本（Jamfiles，一种不同于Makefile的构建脚本，有兴趣自google）：
+
+``` bash
+exe hello : hello.cpp ;
+```
+
+Boost.Build是一个高级编译系统，它能尽可能容易的管理C++项目集。其思想是在配置文件中指定编译程序的要素。例如，它不需要告诉Boost.Build如何使用某个编译器。Boost.Build支持多个编译程序，并知道如何使用它们。如果你创建一个配置文件，你只需要告诉Boost.Build在何处寻找源文件，调用哪些可执行文件，Boost.Build使用哪个编译器。然后，Boost.Build将尝试查找编译器并自动生成程序。
+
+Boost.Build支持许多不包含任何编译器特定选项的编译器的配置文件。配置文件完全是编译器独立的。当然，可以设置选项是否应该优化代码。这些选项都是boost.build语言写的。一旦选择编译器去编译程序, Boost.Build会将配置文件中的选项翻译成相应编译器的命令行选项。这样就有可能写一次配置文件，在不同的平台上用不同的编译器构建程序。
+
+Boost.Build只支持C++和C项目。它是为在不同平台上用不同编译器编译和安装Boost C++库而创造的。
+
+### 小结
+
+各种构建系统各有优缺点，需要深入研究和使用才能了解。没有那个是最好的，只有最适合的。一般：
+
+- 一两个源文件的C++代码，完全没必要用构建系统，直接使用编译器命令直接搞定；
+- 自己用的小项目，直接手动写Makefile即可
+- 大型C++项目建议使用CMake，GNU Build System比较年龄大了，规则有些复杂，写起来没有CMake那么舒服，跨平台的话就根本没戏。
+- 偶尔突破一下，想尝试一下新鲜的构建系统，SCons、Waf、B2等等，等着你玩。
+- 某天感觉构建系统也不过如此，闲的无聊你也可以尝试写一个，这不500行代码搞定：http://www.aosabook.org/en/500L/contingent-a-fully-dynamic-build-system.html
 
 ### 参考资料
 
