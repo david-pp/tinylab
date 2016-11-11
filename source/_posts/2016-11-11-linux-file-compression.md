@@ -126,9 +126,33 @@ gzip -d game.tar.gz
 
 ### 使用tar进行打包和压缩
 
-### 并行以加速压缩和解压缩的速度
+tar cf myfile.tar.bz2 -I pbzip2 file1 fileN dir_to_compress/
 
- tar cf myfile.tar.bz2 -I pbzip2 file1 fileN dir_to_compress/
+### 并行压缩和解压缩
+
+
+普通 vs. 并行         |  普通版用时  | 并行版用时
+-------------------|-------------|--------------
+gzip vs. pigz          | |
+bzip2 vs. pbzip2    | |
+xz  vs. pixz            | |
+
+#### pigz
+
+PIGZ – pigz, which stands for Parallel Implementation of GZip, is a fully functional replacement for gzip that takes advantage of multiple processors and multiple cores when compressing data.
+
+http://zlib.net/pigz/
+
+#### pbzip2
+
+PBZIP2 – pbzip2 is a parallel implementation of the bzip2 block-sorting file compressor that uses pthreads and achieves near-linear speedup on SMP machines. The output of this version is fully compatible with bzip2 v1.0.2 (ie: anything compressed with pbzip2 can be decompressed with bzip2).
+
+http://compression.ca/pbzip2/
+
+
+#### pixz
+
+https://github.com/vasi/pixz
 
 
 ### 压缩算法对比
