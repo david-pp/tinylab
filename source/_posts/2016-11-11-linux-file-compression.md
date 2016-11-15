@@ -5,9 +5,7 @@ category : 工具
 tags: [Linux, 工具]
 ---
 
-为什么要整理一下Linux下的打包和压缩工具呢？原因很简单，因为遇到问题了：**游戏服务器可执行文件、配置和各种资源文件有4G多，每次在做版本的时候，编译完打包压缩要用掉10分钟多**。我在上篇[C++构建系统选择](/2016/10/28/build-system/)里面有提到过，200万行的代码编译用时不到10分钟，而现在一个简单的打包压缩竟然占用了10分钟，虽说这个步骤日常开发过程中很少操作，但每次凌晨做版本的时候，由于需求的变更，需要不断地构建、打包、压缩。做版本的同学苦不堪言，所有开发人员也得等着，这样浪费大家宝贵的时间是极度可耻的！
-
-遇到问题就要解决问题，问题解决了如果不记下来，下次遇到了又得去折腾了。下面进入正题。
+为什么要整理一下Linux下的打包和压缩工具呢？原因很简单，因为遇到问题了：**游戏服务器可执行文件、配置和各种资源文件有4G多，每次在做版本的时候，编译完打包压缩要用掉10分钟多**。我在上篇[C++构建系统选择](/2016/10/28/build-system/)里面有提到过，200万行的代码编译用时不到10分钟，而现在一个简单的打包压缩竟然占用了10分钟，虽说这个步骤日常开发过程中很少操作，但每次凌晨做版本的时候，由于需求的变更，需要不断地构建、打包、压缩。做版本的同学苦不堪言，所有开发人员也得等着，这样浪费大家宝贵的时间是极度可耻的！遇到问题就要解决问题，问题解决了如果不记下来，下次遇到了又得去折腾了。下面进入正题。
 
 虽说打包和压缩的原因各种各样，最重要的目的就是：**减少文件的体积，从而节约磁盘空间和网络带宽**。压缩文件的时候，最注重两个因素：**速度**和**压缩比**。慢如蜗牛还是快如闪电？当然选择越快越好、压缩比越高越好。但是鱼与熊掌不可兼得，往往压缩比高的算法，需要的计算量就比较大，花费的时间就比较多。有没有加速的办法呢？
 
@@ -338,11 +336,18 @@ tar -Ipixz -xf game.tar.xz
 
 ### 小结
 
+本文介绍了Linux下的常用的打包压缩工具：`tar、gzip、bzip2、xz`及其并行版本的基本用法，还有常用的`zip`和`7-ZIP`的命令行版的基本用法，并逐个进行测试对比。
 
+在Linux下面对于压缩格式的选择，我的建议是：
+
+- 临时性的压缩包尽量选择压缩速度快的格式，如：`.gz`。用于持久备份或存档的文件，尽量选择压缩比较大的格式，如：`.bz2`或`.xz`
+- 大文件压缩时，尽量控制在5min以内，否则请尝试使用并行版本或将文件拆分为多份。
+- 尽量使用常见的压缩命令。7z虽然好处多多，Linux较少使用（记得Unix命令的设计哲学：只干一件事，把它做到极致，7z功能太多了）
 
 ### 参考资料
 
-- https://www.digitalocean.com/community/tutorials/an-introduction-to-file-compression-tools-on-linux-servers
+- [How to use 7zip on Linux command Line](https://www.ibm.com/developerworks/community/blogs/6e6f6d1b-95c3-46df-8a26-b7efd8ee4b57/entry/how_to_use_7zip_on_linux_command_line144?lang=en)
+- [An Introduction to File Compression Tools on Linux Servers](https://www.digitalocean.com/community/tutorials/an-introduction-to-file-compression-tools-on-linux-servers)
 - http://ilinuxkernel.com/?p=1748
 - http://compression.ca/pbzip2/
 
