@@ -5,7 +5,7 @@ category : 工具
 tags: [Linux, 工具]
 ---
 
-为什么要整理一下Linux下的打包和压缩工具呢？原因很简单，因为遇到问题了：**游戏服务器可执行文件、配置和各种资源文件有4G多，每次在做版本的时候，编译完打包压缩要用掉10分钟多**。我在上篇[C++构建系统选择](/2016/10/28/build-system/)里面有提到过，200万行的代码编译用时不到10分钟，而现在一个简单的打包压缩竟然占用了10分钟，虽说这个步骤日常开发过程中很少操作，但每次凌晨做版本的时候，由于需求的变更，需要不断地构建、打包、压缩。做版本的同学苦不堪言，所有开发人员也得等着，这样浪费大家宝贵的时间是极度可耻的，家人和孩子们还等着回家了啊！
+为什么要整理一下Linux下的打包和压缩工具呢？原因很简单，因为遇到问题了：**游戏服务器可执行文件、配置和各种资源文件有4G多，每次在做版本的时候，编译完打包压缩要用掉10分钟多**。我在上篇[C++构建系统选择](/2016/10/28/build-system/)里面有提到过，200万行的代码编译用时不到10分钟，而现在一个简单的打包压缩竟然占用了10分钟，虽说这个步骤日常开发过程中很少操作，但每次凌晨做版本的时候，由于需求的变更，需要不断地构建、打包、压缩。做版本的同学苦不堪言，所有开发人员也得等着，这样浪费大家宝贵的时间是极度可耻的！
 
 遇到问题就要解决问题，问题解决了如果不记下来，下次遇到了又得去折腾了。下面进入正题。
 
@@ -75,26 +75,6 @@ time 7za e $tarfile.7z
 
 ### 文件压缩
 
-#### zip
-
-官方首页：http://www.info-zip.org/mans/zip.html
-
-`zip`用于压缩，`unzip`用于解压缩，生成的文件格式是`.zip`。非常古老的压缩方式，压缩比比较低，好处就是由于古老，所以基本上是个操作系统都会默认对此进行支持。
-
-虽然zip和gzip使用的算法都是基于DEFLATE，但具体文件格式是不一样的，所以`.zip`和`.gz`文件是不兼容的。zip很少在Linux下使用，Linux下直接用`gzip`即可，多数情况都是其他平台下生成的`.zip`在Linux系统下面解压一下。
-
-压缩：
-
-``` bash
-zip squash.zip file1 file2 file3  # 压缩文件
-zip -r squash.zip dir1              # 目录打包并压缩
-```
-
-解压缩：
-
-``` bash
-unzip squash.zip
-```
 
 #### gzip
 
@@ -119,45 +99,246 @@ gzip -d game.tar.gz
 
 #### bzip2
 
+官方首页： http://www.bzip.org/
+
+bzip2也是Linux系统常见的压缩方式，压缩后的文件后缀为`.bz2`。bzip2，基于[Burrows–Wheeler algorithm](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform)，可以将文件压缩至10%-15%，解压用时比压缩用时快2-6倍。
+
+gzip和bzip2实现算法不同，决定了它们各有优缺点：**bzip2有比较高的压缩比，相应的压缩用时也要久一些，占用的系统内存也更大；gzip最大的优势就是压缩解压速度快，压缩比稍逊于bzip2。**
+
+压缩：
+
+``` bash
+bzip2 file
+```
+
+解压缩：
+``` bash
+bzip2 -d file.bz2
+```
+
 #### xz
 
+官方首页：http://tukaani.org/xz/
+
+xz是一个相对新的压缩命令，第一版是2009年发出来的。使用了LZMA2算法，该算法有这比高的压缩比，特别适用于对存储或带宽有严格要求的场景下，为了高的压缩比，压缩时间也是大大增加。
+
+xz对压缩比和用时也提供了权衡的选项：
+
+> -0 ... -9               压缩预设，默认为6。
+>-e, --extreme      使用更多的CPU时间提高压缩比
+
+压缩：
+
+``` bash
+xz file
+```
+
+解压缩：
+
+``` bash
+xz -d file.xz
+```
+
+PS. 使用xz时，要注意有些旧版本的Linux操作系统本身不支持，需要安装后才能使用。
+
+#### zip
+
+官方首页：http://www.info-zip.org/mans/zip.html
+
+`zip`用于压缩，`unzip`用于解压缩，生成的文件格式是`.zip`。非常古老的压缩方式，压缩比比较低，好处就是由于古老，所以基本上是个操作系统都会默认对此进行支持。
+
+虽然zip和gzip使用的算法都是基于DEFLATE，但具体文件格式是不一样的，所以`.zip`和`.gz`文件是不兼容的。zip很少在Linux下使用，Linux下直接用`gzip`即可，多数情况都是其他平台下生成的`.zip`在Linux系统下面解压一下。
+
+zip、7z和gzip、bzip2、xz还有一点不同的是，zip和7z本身支持打包，其他压缩命令仅是单纯的对单个文件或文件夹递归进行压缩。
+
+压缩：
+
+``` bash
+zip squash.zip file1 file2 file3  # 压缩文件
+zip -r squash.zip dir1              # 目录打包并压缩
+```
+
+解压缩：
+
+``` bash
+unzip squash.zip
+```
+
 #### 7z
+
+官方首页：http://www.7-zip.org/
+
+7-Zip是一个有着高压缩比的打包压缩工具，提供了多平台（如：Windows、Mac、Linux等）支持，高压缩比也是得益于LZMA和LZMA2算法。上面的测试可以看出，7z和xz都是基于LZMA算法，但时间却天地之差，为何？答案是：7z是多线程的，压缩和解压并行计算。测试用的机器是32核的，在使用7z压缩解压时，CPU利用率达到3000%左右。
+
+p7zip是Linux/Unix下7-ZIP的命令行版，命令是`7za`。7-ZIP并不是单纯的压缩工具，它支持多种压缩格式，在Windows/Mac有界面的系统下还有相应的GUI文件管理器工具支持。
+
+7-ZIP的主要特点：
+
+- High compression ratio in 7z format with LZMA and LZMA2 compression
+Supported formats:
+- Packing 
+    - unpacking: 7z, XZ, BZIP2, GZIP, TAR, ZIP and WIM
+    -Unpacking only: AR, ARJ, CAB, CHM, CPIO, CramFS, DMG, EXT, FAT, GPT, HFS, IHEX, ISO, LZH, LZMA, MBR, MSI, NSIS, NTFS, QCOW2, RAR, RPM, SquashFS, UDF, UEFI, VDI, VHD, VMDK, WIM, XAR and Z.
+- For ZIP and GZIP formats, 7-Zip provides a compression ratio that is 2-10 % better than 
+- the ratio provided by PKZip and WinZip
+- Strong AES-256 encryption in 7z and ZIP formats
+- Self-extracting capability for 7z format
+- Integration with Windows Shell
+- Powerful File Manager
+- Powerful command line version
+- Plugin for FAR Manager
+- Localizations for 87 languages
+
+压缩：
+
+``` bash
+7za a  game.7z  gamedir
+```
+
+解压：
+
+``` bash
+7za e game.7z
+```
+
+PS. 大多Linux下都没有安装7z，需要手动安装。
+
+### 并行压缩和解压缩
+
+压缩比和执行速度，鱼与熊掌两者兼得，如何做呢？上面也看到了7z利用多线程，执行LZMA算法也是很快就完成的。
+
+开篇提到的问题是否也可以利用并行解决呢？由于各种原因，打包格式只能以`.bz2`的形式发布到运维系统，而`bzip2`的压缩速度实在是不敢恭维。bzip2的压缩过程是否可以并行执行？它的算法和文件格式支持的并行的话还好，不然也就没辙了，Google了一把，大神们已经准备了`pbzip2`，测试了一下，几乎被惊呆了：10min一下子只需要50s（32核E5处理器，4G文件大小）。
+
+
+下面整理一下gzip、bzip2和xz及其并行版本的对比：
+
+普通 vs. 并行         |  压缩用时                  |  解压用时
+-------------------|----------------------|--------------
+gzip vs. pigz          | 2m34s  vs. 0m11s    | 0m32s   vs. 0m13s
+bzip2 vs. pbzip2    | 9m20s  vs. 0m40s    | 2m01s   vs. 0m12s 
+xz  vs. pixz            | 28m31s vs. 1m30s   | 1m03s   vs. 0m6s 
+
+#### pigz
+
+官方首页：http://zlib.net/pigz/
+
+PIGZ – pigz，并行版本的gzip的实现 （Parallel Implementation of GZip），利用多线程来执行压缩，生成的文件和gzip完全兼容。解压缩的算法不可以并行化，为了加速，pigz在解压缩的时候创建了3个线程，主线程负责执行解压缩，其他的负责读写和检查计算，所以 解压缩速度比gzip也要快一些。
+
+输入文件被划分成128KB大小的块并行执行压缩算法，然后按照顺序写到输出文件里，默认的块大小是128KB，也可以通过`-b`选项指定大小。执行压缩的线程数量，默认是机器中所有的CPU核心数量，也可以通过`-p`指定压缩线程的数量。
+
+压缩：
+
+``` bash
+pigz game.tar
+```0
+
+解压缩：
+
+``` bash
+pigz -d game.tar.gz
+```
+
+#### pbzip2
+
+官方首页：http://compression.ca/pbzip2/
+
+PBZIP2 – pbzip2，并行版本的bzip2的实现（Parallel implementation of the BZIP2），多线程压缩和解压缩，生成的文件和bzip2兼容，也即是说使用pbzip2生成的`bz2`文件，可以使用`bzip2`进行解压缩，反之亦可。pbzip2的解压过程也是多线程执行的，所以它的解压速度要快于pgiz。
+
+块大小可以通过`-1 ..  -9`或`-b#`来指定，数字分别代表100k .. 900k（默认900k）；线程数量可以通过`-p#`来指定，默认为机器中所有CPU核心。
+
+压缩：
+
+``` bash
+pbzip2 game.tar
+```
+
+解压缩：
+
+``` bash
+pbzip2 game.tar.bz2
+```
+
+#### pixz
+
+官方首页：https://github.com/vasi/pixz
+
+pixz，xz的并行和带索引版（Parallel Indexing xz）。xz生成的`.xz`文件生成一大块压缩后的数据，pixz则生成一系列压缩后的可以随机访问的小块集合。pixz这种索引功能对于特别大的tarball文件特别有用，这样从压缩后的文件里面解压部分文件成为可能。比如在备份数据时候，可能10个G的压缩包，但当你使用此包时，仅需要其中的一个文件，xz则需要把10个G解压后取自己想要的文件，而pixz则直接可以指定解压需要的文件，没必要浪费磁盘和CPU。不过要使用索引功能的话，生成的文件后缀为`.tpxz`和`.xz`不兼容的。
+
+pixz和xz完全兼容，pixz的功能是xz的超集。听起来很不错吧！一般系统都不会安装此工具，源码安装时候依赖的包也有好几个：
+
+- pthreads
+- liblzma
+- libarchive
+- AsciilDoc
+
+压缩：
+
+``` bash
+pixz game.tar game.tar.xz   # 生成与xz兼容的格式
+pixz game.tar           # 生成后缀为tpxz的格式，与xz不兼容
+```
+
+解压缩：
+
+``` bash
+pixz -d game.tar.xz
+pixz -d game.tar.tpxz
+```
 
 
 ### 使用tar进行打包和压缩
 
-tar cf myfile.tar.bz2 -I pbzip2 file1 fileN dir_to_compress/
+上面所提到的压缩命令，`gzip、bzip2、xz`或并行版本的`pigz、pbzip2、pigxz`一般很少单独使用，多数时候都是在`tar`命令打包后执行压缩，合着`tar`一起使用。
 
-### 并行压缩和解压缩
+tar本身支持的选项（xz老版本的tar可能不支持，需要更新哦！）：
 
+``` bash
+# 仅打包
+tar cf  game.tar game-dir
+tar xf  game.tar
 
-普通 vs. 并行         |  普通版用时  | 并行版用时
--------------------|-------------|--------------
-gzip vs. pigz          | |
-bzip2 vs. pbzip2    | |
-xz  vs. pixz            | |
+# 打包后使用gzip进行压缩
+tar cfz game.tar.gz game-dir
+tar xfz game.tar.gz
 
-#### pigz
+# 打包后使用bzip2进行压缩
+tar cfj game.tar.bz2 game-dir
+tar xfj game.tar.bz2
 
-PIGZ – pigz, which stands for Parallel Implementation of GZip, is a fully functional replacement for gzip that takes advantage of multiple processors and multiple cores when compressing data.
+# 打包后使用xz进行压缩
+tar cfJ game.tar.xz game-dir
+tar xfJ game.tar.xz
+```
 
-http://zlib.net/pigz/
+tar指定压缩工具（命令必须支持`-d`选项为解压）：
 
-#### pbzip2
+``` bash
+# 打包后使用并行版本的gzip
+tar -Ipigz -cf game.tar.gz game-dir
+tar -Ipigz -xf game.tar.gz
 
-PBZIP2 – pbzip2 is a parallel implementation of the bzip2 block-sorting file compressor that uses pthreads and achieves near-linear speedup on SMP machines. The output of this version is fully compatible with bzip2 v1.0.2 (ie: anything compressed with pbzip2 can be decompressed with bzip2).
+# 打包后使用并行版本的bzip2
+tar -Ipbzip2 -cf game.tar.bz2 game-dir
+tar -Ipbzip2 -xf game.tar.bz2
 
-http://compression.ca/pbzip2/
+# 打包后使用并行版的xz
+tar -Ipixz -cf game.tar.xz game-dir
+tar -Ipixz -xf game.tar.xz
+```
 
+### 压缩算法
 
-#### pixz
+关于压缩的工具，可谓五花八门。万变不离其宗，上面提到的工具用到的算法如下：
 
-https://github.com/vasi/pixz
+- [DEFLATE](https://en.wikipedia.org/wiki/DEFLATE) 
+- [Burrows–Wheeler algorithm](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform)
+- [LZMA-Lempel–Ziv–Markov chain algorithm](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm)
 
-
-### 压缩算法对比
+压缩算法涉及到一些数据知识和编码学，这里就不详细介绍了，有兴趣的同学自行Google。
 
 ### 小结
+
+
 
 ### 参考资料
 
