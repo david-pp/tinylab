@@ -11,6 +11,8 @@ tags: [Linux, 工具]
 
 下面我会介绍一下我所熟知的Linux下的打包压缩工具，并做下对比，给出建议。上面遇到的问题，最后也会给出解决方法。
 
+![Linux下的打包压缩命令](/images/linux-compression.jpg)
+
 <!--more-->
 
 ### 打包和压缩工具概览
