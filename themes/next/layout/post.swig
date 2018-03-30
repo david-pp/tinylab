@@ -23,6 +23,9 @@
       {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
         {% include '_partials/share/duoshuo_share.swig' %}
       {% endif %}
+      <img class="site-author-image" itemprop="image"
+               src="/images/qrcode_david.jpg"
+               alt="David++" />
     </div>
   </div>
 
