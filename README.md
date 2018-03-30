@@ -4,8 +4,12 @@
 
 ## 依赖
 
-- Node.js 
+- Node.js
 - Hexo
+
+```bash
+npm install hexo -g
+```
 
 
 ## 操作命令
@@ -27,7 +31,7 @@ npm install --save hexo-generator-tag
 
 ```
 hexo server
-``` 
+```
 
 部署：
 
