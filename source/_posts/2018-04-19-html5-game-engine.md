@@ -50,7 +50,7 @@ HTML5，新的Web标准在2014年10月份发布，旨在让浏览器上运行的
 
 - Egret-iOS-Support：是将基于 Egret 引擎开发的游戏转换为 iOS APP 的工具。
 
--  Egret-iOS-Support：是将基于 Egret 引擎开发的游戏转换为 Android APP 的工具。
+- Egret-Android-Support：是将基于 Egret 引擎开发的游戏转换为 Android APP 的工具。
 
 - Egret Micro Client：微端是一种 H5 游戏的原生打包方案。初始包体小、易推广、存留远超传统，具备多网络启动模式和资源缓存功能，易用的第三方 SDK 接入方案。
 
