@@ -7,7 +7,7 @@ tags: []
 
 HTML5，新的Web标准在2014年10月份发布，旨在让浏览器上运行的页面内容和互动更加丰富。许多之前需要插件完成的事情，标准都以简洁的形式予以支持。各大浏览器都在近几年都开始支持H5，Chrome、Safari、IE、腾讯等。过去两年基于H5开发的游戏也不胜枚举，放弃了之前的基于Flash的页游方式，如今跨平台跨设备变得更加便捷，加上硬件性能的提升，基于Web的应用和游戏估计会越来越多。
 
-![HTML](../images/html5-2014.png)
+![HTML](/images/html5-2014.png)
 
 <!--more-->
 
@@ -36,7 +36,7 @@ HTML5，新的Web标准在2014年10月份发布，旨在让浏览器上运行的
 
 北京白鹭是全球最大的HTML5一站式移动技术和服务提供商，致力于为移动互联网全行业提供技术解决方案与服务。截止2017年1月份，白鹭引擎创建的内容占据全行业70%份额，H5游戏全渠道累计排名Top 30，白鹭引擎产品占57%，月流水超过100万的H5游戏，全部由白鹭引擎创建，超过3700款App，采用白鹭H5+原生打包解决方案。
 
- ![Egret](../images/html5-egret-tools.png)
+ ![Egret](/images/html5-egret-tools.png)
 
 - Egret Engine：白鹭引擎，遵循HTML5标准的2D引擎及全新打造的3D引擎，解决了HTML5性能问题及碎片化问题，灵活地满足开发者2D或3D游戏的需求，并有着极强的跨平台运行能力。
 
@@ -63,7 +63,7 @@ Layabox是搜游网络科技（北京）有限公司打造的中国游戏引擎�
 
 旗下还拥有LayaAirIDE等开发工具链，支持开发者可视化编辑UI、动画、代码编写、打包、多平台发布等，为开发者提供丰富的开发与支撑工具
 
- ![LayaAir](../images/html5-laya.png)
+ ![LayaAir](/images/html5-laya.png)
 
 ####  Cocos2d-JS
 
@@ -73,7 +73,7 @@ Cocos2d-X支持基于H5的游戏，使用Javascript编写，貌似大家对Cocos
 
 一款国外的基于H5（Canvas和WebGL）的游戏引擎，完全开源，可以使用JavaScript或者TypeScript进行开发。快速做一些小游戏也是可以尝试使用的。
 
- ![Phaser](../images/html5-phaser.png)
+ ![Phaser](/images/html5-phaser.png)
 
 ### H5渲染引擎
 
