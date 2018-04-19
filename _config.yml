@@ -84,13 +84,6 @@ feed:
 # avatar: /images/avatar.png
 avatar: /images/qrcode_david.jpg
 
-# # 多说评论系统
-# duoshuo_share: true
-# # 多说分享系统
-# duoshuo_shortname: tiny-lab
-# # 多说热评文章 true 或者 false
-# duoshuo_hotartical: true
-
 # # 百度统计
 # baidu_analytics: 32177a2b43f11f13565131b8c1239878
 
