@@ -13,21 +13,21 @@ tags: []
 
 - 浏览器端支持的JavaScript主要包含了三部分：ECMAScript、DOM、BOM。ECMAScript是语言的标准，对语言进行规范化；DOM是文档对象模型，规范化页面内容的访问和操作；BOM最浏览器对象模型，操作和访问浏览器窗口对象，比如历史记录、前进、回退等。ECMAScript近几年特别活跃，使得JavaScript语言的特性有比较大的改变，让这门基于原型的脚本语言变得更加通用和便捷。ES6引入了类、模块等语义，使得面向对象变得更加便捷。
 
-  ![JavaScript标准化](../images/js-timeline2.png)
+  ![JavaScript标准化](/images/js-timeline2.png)
 
   各大浏览器厂商也在不断跟进语言标准。当前比较安全的是ES5，ES6大部分特性可用。
 
-  ![JavaScript](../images/js-browsers.png)
+  ![JavaScript](/images/js-browsers.png)
 
 - CommonJS是非浏览器环境的规范，Node.js采用了该规范设计自己的模块系统。
 
-  ![CommonJS](../images/js-common-js.png)
+  ![CommonJS](/images/js-common-js.png)
 
 ### 2.用途
 
 得益于语言标准化、高性能的解析引擎和Node.js。JavaScript变的无所不能，前后端通吃。看下面流行的JS框架，是不是有种欲罢不能心情，JS的坑也不再仅仅是玩玩Web页面了，深似海的感觉。
 
-  ![JavaScript](../images/js-frameworks.jpg)
+  ![JavaScript](/images/js-frameworks.jpg)
 
 如今的JS，可以用来开发运行在各种各样设备上的应用。最大的好处就是一次开发，任意平台上面运行。
 
@@ -60,4 +60,4 @@ tags: []
 在不同的语言、技术中学习和贯通，也是另外一翻乐趣。不设限、不逾矩。
 
 
-![JavaScript](../images/js-tobe.png)
+![JavaScript](/images/js-tobe.png)
