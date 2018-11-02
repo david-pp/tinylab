@@ -11,16 +11,16 @@ tags: []
 
 - 查找当前电脑里面的patchupdate.exe文件：
 
-![Everything](../images/everything-1.png)
+![Everything](/images/everything-1.png)
 
 
 - 查找当前电脑里面所有的jpg图片：
 
-![Everything](../images/everything-3.png)
+![Everything](/images/everything-3.png)
 
 - 作为键盘流，呼出和隐藏Everything必须加个快捷键，`Tools->Options->Keyboard`可以进行设置（个人偏爱：WIN+`）
 
-![Everything](../images/everything-2.png)
+![Everything](/images/everything-2.png)
 
 
 简直就是一个超级流程的本地所有引擎，有没有。它的功能不止于此，你也可以把网络共享的一些文件夹加进来，也是通过`Tools->Options->Indexes->Folders`进行设置，格式如：`\\192.168.1.16\xx`。
@@ -28,16 +28,16 @@ tags: []
 
 - 自己电脑里面的所有文件，想要别人去访问，把自己的电脑当作一个HTTP文件服务器如何？进行下面设置：
   
-![Everything](../images/everything-5.png))
+![Everything](/images/everything-5.png))
 
 恭喜，局域网内的同学就可以随意下载你电脑上的文件啦。用浏览器打开：
 
-![Everything](../images/everything-4.png))
+![Everything](/images/everything-4.png))
 
 
 - 那能不能检索局域网内别人电脑里面的内容，下载或者进行操作呢？答案是大大的YES，在需要被检索的电脑上，启动Everything，在：`Tools->Options->ETP/FTP Server`里面进行设置；然后其他Everything打开`Tools->Connect To ETP Server`，然后填写IP、用户名、密码即可，把指定的电脑当作自己外接的一块硬盘来用，感觉爽YY。
 
-![Everything](../images/everything-6.png))
+![Everything](/images/everything-6.png))
 
 
 Everything对文件的快速检索，不止于此，支持正则表达式，文件列表等等功能，甚至支持命令行玩法、还提供了做二次开发的SDK，有兴趣的同学自行Google，本帖七言八语主要是让大家知道有这么个神器。工具虽小，对于经常在一堆文件中摸爬滚打的同学们来说就是一把利器，还不赶快用起来？
