@@ -10,6 +10,7 @@ tags: []
 原标题：The System of Tools: Reducing Frustration in a Daily Workflow
 原作者：Laura Teeples (Workflow UX Designer, 343 Industries)
 
+<!--more-->
 
 ![gdc](/images/gdc-tools-talker.jpeg)
 
