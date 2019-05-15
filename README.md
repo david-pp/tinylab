@@ -6,6 +6,7 @@
 
 - Node.js
 - Hexo
+- https://npm.taobao.org/ 淘宝镜像
 
 ```bash
 npm install hexo -g
